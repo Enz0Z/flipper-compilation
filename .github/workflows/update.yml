@@ -1,0 +1,59 @@
+name: "Update Files"
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 12 * * *"
+
+jobs:
+  update_files:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    - name: Initialize
+      run: |
+        sudo apt install git -y
+        rm -rf infrared
+        rm -rf nfc
+        rm -rf subghz
+        mkdir -p infrared
+        mkdir -p nfc
+        mkdir -p subghz
+    - name: IRDB
+      run: |
+        cd infrared
+        wget https://github.com/logickworkshop/Flipper-IRDB/archive/refs/heads/main.zip
+        unzip main.zip
+        rm -rf main.zip
+        mv Flipper-IRDB-main IRDB
+    - name: Amiibo
+      run: |
+        cd nfc
+        wget https://github.com/Gioman101/FlipperAmiibo/archive/refs/heads/main.zip
+        unzip main.zip
+        rm -rf main.zip
+        mv FlipperAmiibo-main Amiibo
+    - name: UberGuidoZ
+      run: |
+        mkdir temp
+        cd temp
+        wget https://github.com/UberGuidoZ/Flipper/archive/refs/heads/main.zip
+        unzip main.zip
+        mkdir ../subghz/vehicles/
+        cp -R Flipper-main/Sub-GHz/Vehicles/* ../subghz/vehicles/
+        mkdir ../subghz/restaurant_pagers/
+        cp -R Flipper-main/Sub-GHz/Restaurant_Pagers/* ../subghz/restaurant_pagers/
+        mkdir ../nfc/fun_files/
+        cp -R Flipper-main/NFC/Fun_Files/* ../nfc/fun_files/
+        cd ..
+        rm -rf temp
+    - name: Commit changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        message: "refactor: updated to \"latest\" changes"
+        branch: "master"
+        author_name: "Enz0Z"
+        author_email: "enz0z@users.noreply.github.com"
