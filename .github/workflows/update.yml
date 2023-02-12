@@ -1,11 +1,11 @@
-name: "Update Files"
+name: "daily update"
 on:
   workflow_dispatch:
   schedule:
   - cron: "0 12 * * *"
 
 jobs:
-  update_files:
+  update:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -27,14 +27,14 @@ jobs:
         wget https://github.com/logickworkshop/Flipper-IRDB/archive/refs/heads/main.zip
         unzip main.zip
         rm -rf main.zip
-        mv Flipper-IRDB-main IRDB
+        mv Flipper-IRDB-main/* ./
     - name: Amiibo
       run: |
         cd nfc
         wget https://github.com/Gioman101/FlipperAmiibo/archive/refs/heads/main.zip
         unzip main.zip
         rm -rf main.zip
-        mv FlipperAmiibo-main Amiibo
+        mv FlipperAmiibo-main amiibo
     - name: UberGuidoZ
       run: |
         mkdir temp
@@ -49,11 +49,16 @@ jobs:
         cp -R Flipper-main/NFC/Fun_Files/* ../nfc/fun_files/
         cd ..
         rm -rf temp
+    - name: Clear
+      run: |
+        find ./infrared -name "*.git*" -type f -delete
+        find ./nfc -name "*.git*" -type f -delete
+        find ./subghz -name "*.git*" -type f -delete
     - name: Commit changes
       uses: actions-js/push@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        message: "refactor: updated to \"latest\" changes"
+        message: "automated"
         branch: "master"
         author_name: "Enz0Z"
         author_email: "enz0z@users.noreply.github.com"
