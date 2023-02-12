@@ -54,6 +54,7 @@ jobs:
         find ./infrared -name "*.git*" -type f -delete
         find ./nfc -name "*.git*" -type f -delete
         find ./subghz -name "*.git*" -type f -delete
+        find . -iname "*.md" -type f -delete
     - name: Commit changes
       uses: actions-js/push@master
       with:
