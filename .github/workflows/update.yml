@@ -25,14 +25,14 @@ jobs:
       run: |
         cd infrared
         wget https://github.com/logickworkshop/Flipper-IRDB/archive/refs/heads/main.zip
-        unzip main.zip
+        unzip -qq main.zip
         rm -rf main.zip
         mv Flipper-IRDB-main/* ./
     - name: Amiibo
       run: |
         cd nfc
         wget https://github.com/Gioman101/FlipperAmiibo/archive/refs/heads/main.zip
-        unzip main.zip
+        unzip -qq main.zip
         rm -rf main.zip
         mv FlipperAmiibo-main amiibo
     - name: UberGuidoZ
@@ -40,7 +40,7 @@ jobs:
         mkdir temp
         cd temp
         wget https://github.com/UberGuidoZ/Flipper/archive/refs/heads/main.zip
-        unzip main.zip
+        unzip -qq main.zip
         mkdir ../subghz/vehicles/
         cp -R Flipper-main/Sub-GHz/Vehicles/* ../subghz/vehicles/
         mkdir ../subghz/restaurant_pagers/
@@ -53,7 +53,7 @@ jobs:
       run: |
         find ./infrared ! -name "*.ir" -type f -delete
         find ./nfc ! -name "*.nfc" -type f -delete
-        find ./subghz \( ! -name "*.sub" -o ! -name "*.raw" \) -type f -delete
+        find ./subghz -not -name "*.sub" -a -not -name "*.raw" -type f -delete
     - name: Commit changes
       uses: actions-js/push@master
       with:
