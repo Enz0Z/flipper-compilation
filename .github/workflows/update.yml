@@ -18,20 +18,22 @@ jobs:
         rm -rf infrared
         rm -rf nfc
         rm -rf subghz
+        rm -rf badusb
         mkdir -p infrared
         mkdir -p nfc
         mkdir -p subghz
+        mkdir -p badusb
     - name: IRDB
       run: |
         cd infrared
-        wget https://github.com/logickworkshop/Flipper-IRDB/archive/refs/heads/main.zip
+        wget -nv https://github.com/logickworkshop/Flipper-IRDB/archive/refs/heads/main.zip
         unzip -qq main.zip
         rm -rf main.zip
         mv Flipper-IRDB-main/* ./
     - name: Amiibo
       run: |
         cd nfc
-        wget https://github.com/Gioman101/FlipperAmiibo/archive/refs/heads/main.zip
+        wget -nv https://github.com/Gioman101/FlipperAmiibo/archive/refs/heads/main.zip
         unzip -qq main.zip
         rm -rf main.zip
         mv FlipperAmiibo-main amiibo
@@ -39,7 +41,7 @@ jobs:
       run: |
         mkdir temp
         cd temp
-        wget https://github.com/UberGuidoZ/Flipper/archive/refs/heads/main.zip
+        wget -nv https://github.com/UberGuidoZ/Flipper/archive/refs/heads/main.zip
         unzip -qq main.zip
         mkdir ../subghz/vehicles/
         cp -R Flipper-main/Sub-GHz/Vehicles/* ../subghz/vehicles/
@@ -49,11 +51,21 @@ jobs:
         cp -R Flipper-main/NFC/Fun_Files/* ../nfc/fun_files/
         cd ..
         rm -rf temp
+    - name: UNC0V3R3D
+      run: |
+        mkdir temp
+        cd temp
+        wget -nv https://github.com/UNC0V3R3D/Flipper_Zero-BadUsb/archive/refs/heads/main.zip
+        unzip -qq main.zip
+        cp -R Flipper_Zero-BadUsb-main/BadUsb-Collection/* ../badusb/
+        cd ..
+        rm -rf temp
     - name: Clear
       run: |
         find ./infrared ! -name "*.ir" -type f -delete
         find ./nfc ! -name "*.nfc" -type f -delete
         find ./subghz -not -name "*.sub" -a -not -name "*.raw" -type f -delete
+        find ./badusb ! -name "*.txt" -type f -delete
     - name: Commit changes
       uses: actions-js/push@master
       with:
