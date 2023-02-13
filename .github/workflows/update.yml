@@ -51,10 +51,9 @@ jobs:
         rm -rf temp
     - name: Clear
       run: |
-        find ./infrared -name "*.git*" -type f -delete
-        find ./nfc -name "*.git*" -type f -delete
-        find ./subghz -name "*.git*" -type f -delete
-        find . -iname "*.md" -type f -delete
+        find ./infrared ! -name "*.ir" -type f -delete
+        find ./nfc ! -name "*.nfc" -type f -delete
+        find ./subghz ! -name "*.sub" -type f -delete
     - name: Commit changes
       uses: actions-js/push@master
       with:
