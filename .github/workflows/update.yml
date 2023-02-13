@@ -53,7 +53,7 @@ jobs:
       run: |
         find ./infrared ! -name "*.ir" -type f -delete
         find ./nfc ! -name "*.nfc" -type f -delete
-        find ./subghz ! -name "*.sub" -type f -delete
+        find ./subghz \( ! -name "*.sub" -o ! -name "*.raw" \) -type f -delete
     - name: Commit changes
       uses: actions-js/push@master
       with:
