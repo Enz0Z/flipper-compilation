@@ -23,21 +23,21 @@ jobs:
         mkdir -p nfc
         mkdir -p subghz
         mkdir -p badusb
-    - name: IRDB
+    - name: logickworkshop/Flipper-IRDB
       run: |
         cd infrared
         wget -nv https://github.com/logickworkshop/Flipper-IRDB/archive/refs/heads/main.zip
         unzip -qq main.zip
         rm -rf main.zip
         mv Flipper-IRDB-main/* ./
-    - name: Amiibo
+    - name: Gioman101/FlipperAmiibo
       run: |
         cd nfc
         wget -nv https://github.com/Gioman101/FlipperAmiibo/archive/refs/heads/main.zip
         unzip -qq main.zip
         rm -rf main.zip
         mv FlipperAmiibo-main amiibo
-    - name: UberGuidoZ
+    - name: UberGuidoZ/Flipper
       run: |
         mkdir temp
         cd temp
@@ -51,13 +51,23 @@ jobs:
         cp -R Flipper-main/NFC/Fun_Files/* ../nfc/fun_files/
         cd ..
         rm -rf temp
-    - name: UNC0V3R3D
+    - name: UNC0V3R3D/Flipper_Zero-BadUsb
       run: |
         mkdir temp
         cd temp
         wget -nv https://github.com/UNC0V3R3D/Flipper_Zero-BadUsb/archive/refs/heads/main.zip
         unzip -qq main.zip
         cp -R Flipper_Zero-BadUsb-main/BadUsb-Collection/* ../badusb/
+        cd ..
+        rm -rf temp
+    - name: Kavitate/FlipperZeroBadUSB
+      run: |
+        mkdir temp
+        cd temp
+        wget -nv https://github.com/Kavitate/FlipperZeroBadUSB/archive/refs/heads/main.zip
+        unzip -qq main.zip
+        mkdir ../badusb/prank/
+        cp -R FlipperZeroBadUSB-main/Prank/* ../badusb/prank/
         cd ..
         rm -rf temp
     - name: Clear
