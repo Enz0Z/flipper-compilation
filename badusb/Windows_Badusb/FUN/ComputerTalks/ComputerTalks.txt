@@ -7,6 +7,6 @@ WINDOWS d
 DELAY 950
 WINDOWS r
 DELAY 650
-STRING owershell.exe -nop -win hidden -c "Add-Type -AssemblyName System.speech; $synth = New-Object System.Speech.Synthesis.SpeechSynthesizer; $synth.Speak('Hello you behind the Screen, I am inside your PC.')"
+STRING powershell.exe -nop -win hidden -c "Add-Type -AssemblyName System.speech; $synth = New-Object System.Speech.Synthesis.SpeechSynthesizer; $synth.Speak('Hello you behind the Screen, I am inside your PC.')"
 DELAY 100
 ENTER
