@@ -1,5 +1,5 @@
 REM Author: UNC0V3R3D
-REM Description: Mutes windows audio...
+REM Description: Uses the device manager to deactivate all networkadapters.
 REM Version: 1.0
 REM Category: FUN
 DELAY 800
