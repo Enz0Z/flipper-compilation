@@ -51,15 +51,6 @@ jobs:
         cp -R Flipper-main/NFC/Fun_Files/* ../nfc/fun_files/
         cd ..
         rm -rf temp
-    - name: UNC0V3R3D/Flipper_Zero-BadUsb
-      run: |
-        mkdir temp
-        cd temp
-        wget -nv https://github.com/UNC0V3R3D/Flipper_Zero-BadUsb/archive/refs/heads/main.zip
-        unzip -qq main.zip
-        cp -R Flipper_Zero-BadUsb-main/BadUsb-Collection/* ../badusb/
-        cd ..
-        rm -rf temp
     - name: Kavitate/FlipperZeroBadUSB
       run: |
         mkdir temp
